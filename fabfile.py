@@ -87,9 +87,9 @@ def deploy_git(deploy_configs):
     remote = deploy_configs.get('remote', 'origin')
     branch = deploy_configs.get('branch', 'gh-pages')
     _mesg = 'Update output documentation'
-    local('git add -A')
-    local('git commit -m "Update master bracnh"')
-    local('git push {0} master'.format(remote))
+    #local('git add -A')
+    #local('git commit -m "Update master bracnh"')
+    #local('git push {0} master'.format(remote))
     local('cd {0}'.format(output_dir))
     local('git add -A')
     local('git commit -m "{0}"'.format(_mesg))
