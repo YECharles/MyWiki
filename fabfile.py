@@ -86,7 +86,6 @@ def deploy_git(deploy_configs):
     output_dir = configs['destination']
     remote = deploy_configs.get('remote', 'origin')
     branch = deploy_configs.get('branch', 'gh-pages')
-    # commit gh-pages branch and push to remote
     _mesg = 'Update output documentation'
     local('git add -A')
     local('git commit -m "Update master bracnh"')
