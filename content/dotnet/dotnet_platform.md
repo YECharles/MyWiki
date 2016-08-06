@@ -1,0 +1,36 @@
+---
+title: ".Net Platform"
+date: 2016-07-09 22:35
+---
+
+[TOC]
+
+# .Net Platform #
+
+IronPython是一种在DotNet和Mono上实现的Python语言，有Jim Hugunin开发。
+
+## IronPython Language ##
+
+    * Has the same syntax with Python
+    * Has different interpreter
+    *
+
+## Using .Net in Ironpython ##
+
+### Import .Net namespaces ###
+### Access .Net type ###
+
+
+## Using Ironpython in .Net ##
+
+### DLR ###
+### Engine ###
+
+## Others ##
+
+## Reference ##
+
+* [Official](http://ironpython.net)
+* [CodePlex](http://ironpython.codeplex.com/)
+
+
