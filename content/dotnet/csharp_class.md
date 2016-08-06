@@ -13,7 +13,7 @@ IronPython是一种在DotNet和Mono上实现的Python语言，有Jim Hugunin开�
 ## IronPython Language ##
 
     * Has the same syntax with Python
-    * Has different interpreter hahah
+    * Has different interpreter!!!!!!!!!!!!!!!!!!!
     *
 
 ## Using .Net in Ironpython ##

@@ -64,20 +64,38 @@ def deploy_rsync(deploy_configs):
     )
 
 
+
+#def deploy_git(deploy_configs):
+    #'''for pages service of such as github/gitcafe ...'''
+    #with settings(warn_only=True):
+    #    res = local('which ghp-import > /dev/null 2>&1; echo $?', capture=True)
+    #    if int(res.strip()):
+    #       do_exit('Warning: ghp-import not installed! '
+    #                'run: `pip install ghp-import`')
+    #output_dir = configs['destination']
+    #remote = deploy_configs.get('remote', 'origin')
+    #branch = deploy_configs.get('branch', 'gh-pages')
+    # commit gh-pages branch and push to remote
+    #_mesg = 'Update output documentation'
+    #local('ghp-import -p -m "{0}" -r {1} -b {2} {3}'
+          #.format(_mesg, remote, branch, output_dir))
+
+
+
 def deploy_git(deploy_configs):
-    '''for pages service of such as github/gitcafe ...'''
-    with settings(warn_only=True):
-        res = local('which ghp-import > /dev/null 2>&1; echo $?', capture=True)
-        if int(res.strip()):
-            do_exit('Warning: ghp-import not installed! '
-                    'run: `pip install ghp-import`')
     output_dir = configs['destination']
     remote = deploy_configs.get('remote', 'origin')
     branch = deploy_configs.get('branch', 'gh-pages')
     # commit gh-pages branch and push to remote
     _mesg = 'Update output documentation'
-    local('ghp-import -p -m "{0}" -r {1} -b {2} {3}'
-          .format(_mesg, remote, branch, output_dir))
+    local('git add -A')
+    local('git commit -m "Update master bracnh"')
+    local('git push {0} master'.format(remote))
+    local('cd {0}'.format(output_dir))
+    local('git add -A')
+    local('git commit -m "{0}"'.format(_mesg))
+    local('git push {0} {1}'.format(remote, branch))
+
 
 
 def deploy_ftp(deploy_configs):
