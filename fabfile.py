@@ -90,10 +90,11 @@ def deploy_git(deploy_configs):
     #local('git add -A')
     #local('git commit -m "Update master bracnh"')
     #local('git push {0} master'.format(remote))
-    local('cd {0}'.format(output_dir))
-    local('git add -A')
-    local('git commit -m "{0}"'.format(_mesg))
-    local('git push {0} {1}'.format(remote, branch))
+    local('cd /home/yechang/git/github/MyWiki/output')
+    local('pwd')
+    #local('git add -A')
+    #local('git commit -m "{0}"'.format(_mesg))
+    #local('git push {0} {1}'.format(remote, branch))
 
 
 
