@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    <title>Git - My Wiki</title>
+    <meta name="keywords" content="My Wiki"/>
+    <meta name="description" content="My Wiki"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="container">
+      
+<div id="header">
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#tools">tools</a>&nbsp;&#187;&nbsp;Git
+    <span class="updated">Updated&nbsp;
+      2016-08-07 10:35
+    </span></div>
+</div>
+<div class="clearfix"></div>
+
+<div class="page_title">Git</div>
+
+  <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#git">Git</a><ul>
+<li><a href="#_1">本地版本控制</a><ul>
+<li><a href="#_2">三个状态</a></li>
+<li><a href="#_3">版本之间</a></li>
+<li><a href="#_4">常用命令</a></li>
+</ul>
+</li>
+<li><a href="#_5">分支管理</a></li>
+<li><a href="#_6">远程仓库</a></li>
+<li><a href="#others">Others</a><ul>
+<li><a href="#_7">常用命令</a></li>
+</ul>
+</li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="git">Git</h1>
+<p>git是一个分布式的版本控制系统和代码管理工具。<code>github</code>,<code>gitlab</code>是一个基于git的项目托管平台，它提供了web界面，你可以在上面创建资源仓库来存放你的项目。
+初始化项目两种方式：
+通过远程新建仓库，并克隆到本地：git clone URI，一般可用两种协议：ssh或https
+通过本地新建仓库，并推送远程：
+    $ cd target_dic
+    $ git init
+    $ git add .
+    $ git commit -m "commnet"
+    $ git remote add origin URI   #一般可用两种协议：ssh或https
+    $ git push -u origin branch
+git URI两种形式(<code>ssh</code>和<code>https</code>):
+    git@github.com:YECharles/MyWiki.git
+    https://github.com/YECharles/MyWiki.git</p>
+<h2 id="_1">本地版本控制</h2>
+<h3 id="_2">三个状态</h3>
+<p>Working Diretory(or Untracted Files) -&gt; Staging Area -&gt; Repository
+撤销Working Directory修改：
+    $ git checkout [file | directory]
+撤销Untracted Files:
+    $ rm file/directory
+    $ git clean -dxf
+Working Diretory(or Untracted Files) to  Staging Area
+    $ git add [-A | file | directory]
+Staging Area to Working Diretory(or Untracted Files)
+    $ git reset HEAD [file | ]
+Staging Area to Repository
+    $ git commit -m "comment"</p>
+<h3 id="_3">版本之间</h3>
+<p>回退到上一个版本，HEAD指向当前版本：
+    $ git reset --hard HEAD^
+回退两个版本，HEAD指向当前版本：
+    $ git reset --hard HEAD^
+跳转到任意版本：
+    $ git reset --hard commit_id</p>
+<h3 id="_4">常用命令</h3>
+<div class="hlcode"><pre><span class="err">$</span> <span class="n">git</span> <span class="n">status</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">diff</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">log</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">show</span>
+</pre></div>
+
+
+<h2 id="_5">分支管理</h2>
+<p>新建分支：
+    $ git checkout -b branch   #在当前分支基础上新建本地分支branch
+    $ git checkout -b branch origin/branch   #在远程origin/branch的基础上新建对应的本地分支branch
+    $ git push origin branch   #在本地分支branch基础上，在远程创建对应远程分支origin/branch
+删除分支:
+    $ git branch -d branch_name   #删除本地分支
+合并分支，合并前确保相应的修改已提交本地版本库:
+    $ git merge branch_name   #合并分支branch_name到当前分支
+合并冲突：两个分支相对于分支起点（新分支创建点的版本），对同一个文件做了不同修改，此时需要手动合并。合并分支步骤：
+    1. 当前分支feature开发完成，并提交到本地仓库
+    2. 跳转回主分支dev(需要合并到的分支)
+    3. 更新主分支dev到最新状态: git pull origin dev
+    4. 合并分支feature到主分支dev: git merge feature
+    5. 如有冲突，需手动解决
+    6. 推送最总版本到远程分支: git push origin dev</p>
+<h2 id="_6">远程仓库</h2>
+<p>远程库是软件发布的主要库，多人协作后最红将最终版本推送到远程库，由远程库管理员进行review和发布</p>
+<p>远程库和本地库对应关系：branch-&gt;origin/branch-&gt;origin branch
+    branch: 本地版本库
+    origin/branch指向本地和远程上一次交互的版本(本地库），并非真正远程库
+    origin branch: 远程版本库
+git pull可分为以下两步：
+    git fetch: 从远程库拉代码，origin/branch指向最新版本
+    git merge: 合并origin/branch指向的版本与当前最新的版本</p>
+<p>git puch:向远程推送版本,origin/branch会指向最新推送的版本</p>
+<h2 id="others">Others</h2>
+<h3 id="_7">常用命令</h3>
+<div class="hlcode"><pre><span class="err">$</span> <span class="n">git</span> <span class="n">status</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">diff</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">log</span>   <span class="err">#</span> <span class="err">当前分支的</span><span class="n">log</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">log</span> <span class="n">file</span>   <span class="err">#</span> <span class="err">涉及到当前文件的</span><span class="n">log</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">show</span> <span class="n">commit_id</span>
+</pre></div>
+
+
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://git-scm.com/book/zh/v2">Pro Git</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰</a></li>
+</ul>
+    </div>
+    <div id="footer">
+      <span>
+        <p>Copyright © 2016 Chang Ye.
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
+        <p>Site Generated 2016-08-07 14:55:03</p>
+      </span>
+    </div>
+  </body>
+</html>
