@@ -12,6 +12,9 @@ git是一个分布式的版本控制系统和代码管理工具。`github`,`gitl
 初始化项目两种方式：
 
 通过远程新建仓库，并克隆到本地：git clone URI，一般可用两种协议：ssh或https
+    
+    $ git clone -b branch URI   # 克隆指定branch到当前目录
+    $ git clone -b branch URI dirc   # 克隆指定branch到指定目录dirc
 
 通过本地新建仓库，并推送远程：
 
